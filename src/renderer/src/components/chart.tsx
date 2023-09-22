@@ -1,23 +1,75 @@
 import { FC } from 'react'
-import { LineChart, Line, XAxis, YAxis } from 'recharts'
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer
+} from 'recharts'
 
 const data = [
-  { name: 'Page A', uv: 400 },
-  { name: 'Page B', uv: 300 },
-  { name: 'Page C', uv: 100 },
-  { name: 'Page D', uv: 500 },
-  { name: 'Page E', uv: 400 }
+  { timeCode: '00:01:43', uv: 400 },
+  { timeCode: '00:03:43', uv: 300 },
+  { timeCode: '00:01:20', uv: 100 },
+  { timeCode: '00:02:43', uv: 500 },
+  { timeCode: '00:04:43', uv: 400 }
 ]
 
-const Chart: FC = () => {
+interface IChartProps {
+  toTimeCode: (timeStamp: string) => void
+}
+
+const Chart: FC<IChartProps> = ({ toTimeCode }) => {
   return (
-    <div>
+    <div className="p-5 flex flex-col gap-3 break justify-center items-center">
       <h1 className="text-[30px] font-bold">График отвлечения бригады во время работы</h1>
-      <LineChart width={400} height={400} data={data}>
-        <Line dot type="monotone" strokeWidth={2} dataKey="uv" stroke="#8884d8" />
-        <XAxis dataKey="name" />
-        <YAxis />
-      </LineChart>
+      <ResponsiveContainer width="80%" height={400}>
+        <LineChart data={data}>
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <Line
+            dot
+            activeDot={{
+              r: 9,
+              onClick: (props, { payload }: any) => {
+                props
+                toTimeCode(payload.timeCode)
+              }
+            }}
+            type="monotone"
+            strokeWidth={2}
+            dataKey="uv"
+            stroke="#8884d8"
+          />
+          <XAxis
+            dataKey="timeCode"
+            tick={({ payload, x, y }) => {
+              return (
+                <g transform={`translate(${x},${y})`}>
+                  <text
+                    onClick={() => {
+                      toTimeCode(payload.value)
+                    }}
+                    x={0}
+                    textAnchor="middle"
+                    y={0}
+                    dy={20}
+                    fill="#666"
+                  >
+                    {payload.value}
+                  </text>
+                </g>
+              )
+            }}
+            onClick={() => {
+              console.log()
+            }}
+          />
+          <YAxis />
+          <Tooltip />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   )
 }
