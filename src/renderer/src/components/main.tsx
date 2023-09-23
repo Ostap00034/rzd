@@ -4,6 +4,7 @@ import Statistic from './statistic'
 import CircleChart from './circlechart'
 import { useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
+import { Link } from 'react-router-dom'
 
 const links = ['./1.mp4', './2.mp4', '3.mp4']
 
@@ -47,7 +48,9 @@ const Main = () => {
   return (
     <div className="flex flex-col gap-6 px-4 bg-white w-full min-h-screen justify-start items-center">
       <nav className="flex flex-row p-2 h-[80px] justify-center items-center w-full bg-[#fafffa]">
-        <img className="h-[70px]" src="./logo.png" alt="Логотип" />
+        <Link to="/">
+          <img className="h-[70px]" src="./logo.png" alt="Логотип" />
+        </Link>
       </nav>
       <div className="flex flex-col w-full justify-center items-center">
         <div className="w-full flex flex-row justify-between items-center gap-6">
