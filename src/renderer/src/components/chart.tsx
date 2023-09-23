@@ -10,11 +10,22 @@ import {
 } from 'recharts'
 
 const data = [
-  { timeCode: '00:01:43', uv: 400 },
-  { timeCode: '00:03:43', uv: 300 },
-  { timeCode: '00:01:20', uv: 100 },
-  { timeCode: '00:02:43', uv: 500 },
-  { timeCode: '00:04:43', uv: 400 }
+  { timeCode: '04:43', uv: 400 },
+  { timeCode: '01:43', uv: 400 },
+  { timeCode: '03:43', uv: 300 },
+  { timeCode: '01:20', uv: 100 },
+  { timeCode: '02:43', uv: 500 },
+  { timeCode: '04:43', uv: 400 },
+  { timeCode: '04:43', uv: 400 },
+  { timeCode: '04:43', uv: 400 },
+  { timeCode: '04:43', uv: 400 },
+  { timeCode: '04:43', uv: 30 },
+  { timeCode: '04:43', uv: 200 },
+  { timeCode: '04:43', uv: 400 },
+  { timeCode: '03:43', uv: 100 },
+  { timeCode: '04:43', uv: 120 },
+  { timeCode: '04:43', uv: 120 },
+  { timeCode: '04:43', uv: 120 }
 ]
 
 interface IChartProps {
@@ -23,11 +34,11 @@ interface IChartProps {
 
 const Chart: FC<IChartProps> = ({ toTimeCode }) => {
   return (
-    <div className="p-5 flex flex-col gap-3 break justify-center items-center">
+    <div className="p-5 flex flex-col w-full gap-3 break justify-center items-center">
       <h1 className="text-[30px] font-bold">График отвлечения бригады во время работы</h1>
-      <ResponsiveContainer width="80%" height={400}>
+      <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <CartesianGrid stroke="#e31b1a" strokeDasharray="5 5" />
           <Line
             dot
             activeDot={{
@@ -40,7 +51,7 @@ const Chart: FC<IChartProps> = ({ toTimeCode }) => {
             type="monotone"
             strokeWidth={2}
             dataKey="uv"
-            stroke="#8884d8"
+            stroke="#e31b1a"
           />
           <XAxis
             dataKey="timeCode"
@@ -55,7 +66,7 @@ const Chart: FC<IChartProps> = ({ toTimeCode }) => {
                     textAnchor="middle"
                     y={0}
                     dy={20}
-                    fill="#666"
+                    fill="black"
                   >
                     {payload.value}
                   </text>
