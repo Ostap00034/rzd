@@ -9,30 +9,31 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-const data = [
-  { timeCode: '04:43', uv: 400 },
-  { timeCode: '01:43', uv: 400 },
-  { timeCode: '03:43', uv: 300 },
-  { timeCode: '01:20', uv: 100 },
-  { timeCode: '02:43', uv: 500 },
-  { timeCode: '04:43', uv: 400 },
-  { timeCode: '04:43', uv: 400 },
-  { timeCode: '04:43', uv: 400 },
-  { timeCode: '04:43', uv: 400 },
-  { timeCode: '04:43', uv: 30 },
-  { timeCode: '04:43', uv: 200 },
-  { timeCode: '04:43', uv: 400 },
-  { timeCode: '03:43', uv: 100 },
-  { timeCode: '04:43', uv: 120 },
-  { timeCode: '04:43', uv: 120 },
-  { timeCode: '04:43', uv: 120 }
-]
+// const data = [
+//   { timeCode: '04:43', uv: 400 },
+//   { timeCode: '01:43', uv: 400 },
+//   { timeCode: '03:43', uv: 300 },
+//   { timeCode: '01:20', uv: 100 },
+//   { timeCode: '02:43', uv: 500 },
+//   { timeCode: '04:43', uv: 400 },
+//   { timeCode: '04:43', uv: 400 },
+//   { timeCode: '04:43', uv: 400 },
+//   { timeCode: '04:43', uv: 400 },
+//   { timeCode: '04:43', uv: 30 },
+//   { timeCode: '04:43', uv: 200 },
+//   { timeCode: '04:43', uv: 400 },
+//   { timeCode: '03:43', uv: 100 },
+//   { timeCode: '04:43', uv: 120 },
+//   { timeCode: '04:43', uv: 120 },
+//   { timeCode: '04:43', uv: 120 }
+// ]
 
 interface IChartProps {
   toTimeCode: (timeStamp: string) => void
+  data: any
 }
 
-const Chart: FC<IChartProps> = ({ toTimeCode }) => {
+const Chart: FC<IChartProps> = ({ toTimeCode, data }) => {
   return (
     <div className="p-5 flex flex-col w-full gap-3 break justify-center items-center">
       <h1 className="text-[30px] font-bold">График отвлечения бригады во время работы</h1>

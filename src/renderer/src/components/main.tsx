@@ -21,6 +21,30 @@ const Main = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const [canNext, setCanNext] = useState(true)
   const [canPrev, setCanPrev] = useState(false)
+  const [path, setPath] = useState<string | null>('')
+  const [path2, setPath2] = useState<string | null>('')
+
+  useEffect(() => {
+    // Получаем текущий URL
+
+    if (window === undefined) return
+    const currentUrl = window.location.search
+    console.log(currentUrl)
+    // Создаем объект URLSearchParams для извлечения параметров
+    const urlSearchParams = new URLSearchParams(currentUrl)
+    console.log(urlSearchParams)
+    // Получаем значение параметра "path"
+    const pathParam = urlSearchParams.get('path')
+    setPath(pathParam)
+
+    const jsonFilePath = '/json/' + pathParam?.split('.mp4')[0] + '_bad_activities.json'
+
+    setPath2(jsonFilePath)
+
+    console.log('Значение параметра "path":', pathParam)
+
+    // Далее вы можете использовать значение pathParam в вашем компоненте
+  }, [window])
 
   useEffect(() => {
     if (currentVideoIndex == links.length - 1) setCanNext(false)
@@ -55,19 +79,14 @@ const Main = () => {
       <div className="flex flex-col w-full justify-center items-center">
         <div className="w-full flex flex-row justify-between items-center gap-6">
           <Wrapper canNext={canNext} canPrev={canPrev} prev={playPrevVideo} next={playNextVideo}>
-            <ReactPlayer
-              onEnded={playNextVideo}
-              ref={playerRef}
-              controls={true}
-              url={links[currentVideoIndex]}
-            />
+            <ReactPlayer onEnded={playNextVideo} ref={playerRef} controls={true} url={path} />
           </Wrapper>
 
           <Statistic />
           <CircleChart />
         </div>
 
-        <Chart toTimeCode={toTimeCode} />
+        <Chart toTimeCode={toTimeCode} data="" />
       </div>
     </div>
   )

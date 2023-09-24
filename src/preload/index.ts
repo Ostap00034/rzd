@@ -1,6 +1,8 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-
+import { ipcRenderer } from 'electron'
+// @ts-ignore (define in dts)
+window.ipcRenderer = ipcRenderer
 // Custom APIs for renderer
 const api = {}
 
